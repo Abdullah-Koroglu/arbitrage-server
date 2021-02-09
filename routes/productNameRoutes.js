@@ -21,12 +21,12 @@ router.get('/productname', async (req, res) => {
 router.post('/deleteAllProductNames', (req) => {
   if(req.body.name === 'yetkili')
   ProductName.remove({}, () => {
-    console.log('deleted all products');
+    console.log('deleted all product names');
   })
 })
 
 router.post('/productname', async(req, res) => {
-  const { name, link } = req.body;
+  const { name, link , category } = req.body;
   
   if (!name || !link) {
     return res
@@ -35,7 +35,7 @@ router.post('/productname', async(req, res) => {
   }
   
     try {
-      const productname = new ProductName({ name, link});
+      const productname = new ProductName({ name, link , category});
       await productname.save();
       res.send(productname);
     } catch (err) {
